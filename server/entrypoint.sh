@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+: ${DEVPI_HOST:=0.0.0.0}
+: ${DEVPI_PORT:=3141}
+
 # Helper function used to make all logging messages look similar.
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S,000') $1 [entrypoint] $2"
@@ -62,7 +65,7 @@ fi
 # Launch the server as the main process.
 # Latest version will block correctly and listens to Ctrl+C.
 devpi-server \
-    --host 0.0.0.0 \
-    --port 3141 \
+    --host "${DEVPI_HOST}" \
+    --port "${DEVPI_PORT}" \
     --restrict-modify=root \
     $@
